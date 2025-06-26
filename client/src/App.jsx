@@ -43,6 +43,7 @@ function App() {
         localStorage.setItem("token", data.token);
         await checkUser();
         navigate("/");
+        
       } else {
         navigate("/login");
       }
