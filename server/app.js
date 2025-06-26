@@ -7,7 +7,12 @@ const port = process.env.PORT || 5500;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173/",
+    credentials: true,
+  })
+);
 //check connection
 const dbCon = require("./db/dbConfig");
 //auth middleware

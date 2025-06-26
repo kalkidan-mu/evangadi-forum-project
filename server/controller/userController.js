@@ -58,7 +58,7 @@ async function login(req, res) {
   }
 
   try {
-    const [user] = await dbCon.query(
+      const [user] = await dbCon.query(
       "SELECT username,userid,password FROM usersTable WHERE email=?",
       [email]
     );
@@ -78,7 +78,7 @@ async function login(req, res) {
     //destructure user
     const username = user[0].username;
     const userid = user[0].userid;
-    const token = jwt.sign({ username, userid }, "secret", {
+    const token = jwt.sign({ username, userid }, process.env.JWT_SECRET, {
       expiresIn: "30d",
     });
     return res
