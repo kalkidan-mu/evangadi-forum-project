@@ -78,6 +78,7 @@ function App() {
           setUser,
           isLoggedIn,
           setIsLoggedIn,
+          setLoading,
           loading,
           appErrors,
           login,
