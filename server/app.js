@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-const port = 5500;
+const port = process.env.PORT || 5500;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -38,14 +38,13 @@ async function start() {
     //create table if not exists
     const createTable = require("./migrate/createTable");
     await createTable();
+
+    app.listen(port, () => {
+      console.log(`Server is running on http://localhost:${port}`);
+    });
   } catch (error) {
     console.error(error.message);
     process.exit(1);
   }
 }
-
 start();
-
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
