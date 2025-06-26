@@ -5,7 +5,6 @@ const cors = require("cors");
 
 const port = process.env.PORT || 5500;
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -41,7 +40,7 @@ async function start() {
     await createTable();
 
     app.listen(port, () => {
-      console.log(`Server is running on http://localhost:${port}`);
+      console.log(`Server is running on port ${port}`);
     });
   } catch (error) {
     console.error(error.message);
@@ -49,5 +48,3 @@ async function start() {
   }
 }
 start();
-
-
