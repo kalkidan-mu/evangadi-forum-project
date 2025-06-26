@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { AppState } from "../../App";
 function Register() {
   const navigate = useNavigate();
-  const { isLoggedIn } = useContext(AppState);
+  const { isLoggedIn, loading,setLoading } = useContext(AppState);
   // refs
   const usernameDome = useRef();
   const firstnameDome = useRef();
@@ -36,6 +36,7 @@ function Register() {
   };
 
   async function handleSubmit(e) {
+    setLoading(true);
     e.preventDefault();
     if (!validateFields()) return;
 
@@ -53,6 +54,8 @@ function Register() {
       const serverMsg = error.response?.data?.msg || "Registration failed";
       console.error("Registration error:", serverMsg);
       setErrors({ server: serverMsg });
+    }finally{
+      setLoading(false)
     }
   }
 
@@ -129,7 +132,24 @@ function Register() {
               <a href="#">terms of service</a>
             </p>
 
-            <button type="submit">Agree and Join</button>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <span
+                    className="spinner-border spinner-border-sm me-2"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Registering...
+                </>
+              ) : (
+                "Register"
+              )}
+            </button>
             <p>Already have an account?</p>
           </form>
         </section>
