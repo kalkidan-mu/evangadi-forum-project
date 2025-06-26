@@ -37,6 +37,7 @@ function App() {
   }
 
   const login = async (credentials) => {
+    setLoading(true);
     try {
       const { data } = await axios.post("/users/login", credentials);
       if (data.token) {
@@ -50,6 +51,8 @@ function App() {
     } catch (error) {
       console.error("Login error:", error.message);
       throw error;
+    }finally{
+      setLoading(false);
     }
   };
 

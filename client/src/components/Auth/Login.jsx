@@ -7,7 +7,7 @@ import { AppState } from "../../App";
 function Login() {
   const [errors, setErrors] = useState({});
   // Access login function from context
-  const { login, IsLoggedIn } = useContext(AppState);
+  const { login, IsLoggedIn, loading } = useContext(AppState);
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -87,9 +87,7 @@ function Login() {
                     <form onSubmit={handleSubmit} className={style.form}>
                       <div
                         className={
-                          errors.email
-                            ? style.error_input
-                            : style.from_input
+                          errors.email ? style.error_input : style.from_input
                         }
                       >
                         <input
@@ -102,9 +100,7 @@ function Login() {
                       <br />
                       <div
                         className={
-                          errors.password
-                            ? style.error_input
-                            : style.from_input
+                          errors.password ? style.error_input : style.from_input
                         }
                       >
                         <input
@@ -128,7 +124,24 @@ function Login() {
                         <Link to={"/login"}>Forgot password</Link>
                       </div>
                       <div className={style.btn}>
-                        <button type="submit">Login</button>
+                        <button
+                          type="submit"
+                          className="btn btn-primary"
+                          disabled={loading}
+                        >
+                          {loading ? (
+                            <>
+                              <span
+                                className="spinner-border spinner-border-sm me-2"
+                                role="status"
+                                aria-hidden="true"
+                              ></span>
+                              Logging in...
+                            </>
+                          ) : (
+                            "Login"
+                          )}
+                        </button>
                       </div>
                     </form>
                   </div>
