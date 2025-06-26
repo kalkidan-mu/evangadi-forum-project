@@ -5,14 +5,10 @@ const cors = require("cors");
 
 const port = process.env.PORT || 5500;
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(
-  cors({
-    origin: "http://localhost:5173/",
-    credentials: true,
-  })
-);
+app.use(cors());
 //check connection
 const dbCon = require("./db/dbConfig");
 //auth middleware
@@ -53,3 +49,5 @@ async function start() {
   }
 }
 start();
+
+
