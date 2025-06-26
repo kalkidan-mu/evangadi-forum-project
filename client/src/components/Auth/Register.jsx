@@ -36,10 +36,9 @@ function Register() {
   };
 
   async function handleSubmit(e) {
-    setLoading(true);
-    e.preventDefault();
+        e.preventDefault();
     if (!validateFields()) return;
-
+    setLoading(true)
     try {
       await axios.post("/users/register", {
         username: usernameDome.current.value,
@@ -80,8 +79,10 @@ function Register() {
                 errors.username ? classes.error : ""
               }`}
               ref={usernameDome}
+              name="username"
               type="text"
               placeholder="Username *"
+              autoComplete="username"
             />
 
             <div className={classes.form_flex}>
@@ -90,8 +91,10 @@ function Register() {
                   errors.firstname ? classes.error : ""
                 }`}
                 ref={firstnameDome}
+                name="firstName"
                 type="text"
                 placeholder="First name *"
+                autoComplete="given-name"
               />
 
               <input
@@ -99,8 +102,10 @@ function Register() {
                   errors.lastname ? classes.error : ""
                 }`}
                 ref={lastnameDome}
+                name="lastName"
                 type="text"
                 placeholder="Last name *"
+                autoComplete="family-name"
               />
             </div>
 
@@ -109,8 +114,10 @@ function Register() {
                 errors.email ? classes.error : ""
               }`}
               ref={emailDom}
+              name="email"
               type="email"
               placeholder="Email *"
+              autoComplete="email"
             />
 
             <div className={classes.passwordField}>
@@ -119,8 +126,10 @@ function Register() {
                   errors.password ? classes.error : ""
                 }`}
                 ref={passwordDome}
+                name="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="Password *"
+                autoComplete="new-password"
               />
               <span onClick={() => setShowPassword((prev) => !prev)}>
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
